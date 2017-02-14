@@ -1,6 +1,7 @@
 package com.example.administrator.bqtest;
 
 import com.example.frescotest.BQMainActivity;
+import com.example.openimtest.OpenIMTestActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), BQMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.oim_bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), OpenIMTestActivity.class);
                 startActivity(intent);
             }
         });

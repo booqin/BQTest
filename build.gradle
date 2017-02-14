@@ -20,6 +20,7 @@ allprojects {
         repositories{
             maven {url "http://120.26.91.179:8081/nexus/content/repositories/android/"}
             maven {url "http://120.26.91.179:8081/nexus/content/repositories/androidSnapshots/"}
+            maven { url 'http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/' }
         }
     }
 }

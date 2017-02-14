@@ -19,6 +19,8 @@
         </activity>
 
         <activity android:name="com.example.frescotest.BQMainActivity"/>
+
+        <activity android:name="com.example.openimtest.OpenIMTestActivity"/>
     </application>
 
 </manifest>

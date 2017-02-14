@@ -1,1 +1,1 @@
-include ':app', ':frescotest'
+include ':app', ':frescotest', ':openimtest', ':wx'

@@ -1,11 +1,11 @@
 package com.example.administrator.bqtest;
 
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.wxlib.util.SysUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 /**
  * TODO
@@ -15,6 +15,9 @@ import android.graphics.BitmapFactory;
  * @Version
  */
 public class BQApplication extends Application{
+
+    final String APP_KEY = "23015524";
+
     /** 产品版本 */
     public static String APP_VERSION;
     /** 设备ID */
@@ -53,7 +56,21 @@ public class BQApplication extends Application{
         MissApp = this;
 
         Fresco.initialize(this, FrescoConfig.getConfig(this));
+
+        initOpenIM();
     }
 
+    private void initOpenIM() {
+        //必须首先执行这部分代码, 如果在":TCMSSevice"进程中，无需进行云旺（OpenIM）和app业务的初始化，以节省内存;
+        SysUtil.setApplication(this);
+        if(SysUtil.isTCMSServiceProcess(this)){
+            return;
+        }
+        //第一个参数是Application Context
+        //这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
+        if(SysUtil.isMainProcess()){
+            YWAPI.init(this, APP_KEY);
+        }
+    }
 
 }
