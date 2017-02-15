@@ -16,8 +16,8 @@ import android.content.Context;
  */
 public class BQApplication extends Application{
 
+    /** 官方默认的key */
     final String APP_KEY = "23015524";
-
     /** 产品版本 */
     public static String APP_VERSION;
     /** 设备ID */
