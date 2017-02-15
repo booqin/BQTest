@@ -28,7 +28,7 @@ public class OpenIMTestActivity extends AppCompatActivity {
     private final String userid = "testpro1";
     private final String password = "taobao1234";
 
-    private final String target = "testpro2"; //消息接收者ID
+    private final String target = "testpro17"; //消息接收者ID
     private final String appkey = "23015524"; //消息接收者appKey
 
     private YWIMKit mIMKit;
