@@ -21,6 +21,9 @@
         <activity android:name="com.example.frescotest.BQMainActivity"/>
 
         <activity android:name="com.example.openimtest.OpenIMTestActivity"/>
+
+        <activity android:name="com.example.domainsetting.DomainSettingActivity"/>
+
     </application>
 
 </manifest>

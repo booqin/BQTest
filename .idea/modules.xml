@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BQTest.iml" filepath="$PROJECT_DIR$/BQTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domainsetting/domainsetting.iml" filepath="$PROJECT_DIR$/domainsetting/domainsetting.iml" />
       <module fileurl="file://$PROJECT_DIR$/frescotest/frescotest.iml" filepath="$PROJECT_DIR$/frescotest/frescotest.iml" />
       <module fileurl="file://$PROJECT_DIR$/openimtest/openimtest.iml" filepath="$PROJECT_DIR$/openimtest/openimtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/wx/wx.iml" filepath="$PROJECT_DIR$/wx/wx.iml" />

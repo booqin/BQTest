@@ -1,5 +1,6 @@
 package com.example.administrator.bqtest;
 
+import com.example.domainsetting.DomainSettingActivity;
 import com.example.frescotest.BQMainActivity;
 import com.example.openimtest.OpenIMTestActivity;
 
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), OpenIMTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.dm_bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DomainSettingActivity.class);
                 startActivity(intent);
             }
         });
