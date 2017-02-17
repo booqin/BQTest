@@ -4,13 +4,14 @@ import com.example.domainsetting.R;
 import com.example.domainsetting.bean.DomainBean;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 /**
- * TODO
+ * 域名VH
  * Created by Boqin on 2017/2/16.
  * Modified by Boqin
  *
@@ -18,7 +19,9 @@ import android.widget.TextView;
  */
 public class DomainViewHolder extends RecyclerView.ViewHolder{
 
+    /** 域名编辑框 */
     private TextView mDomainTV;
+    /** 选中框 */
     private CheckBox mSelected;
 
     public DomainViewHolder(View itemView) {
@@ -28,7 +31,7 @@ public class DomainViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void render(DomainBean d){
-        mDomainTV.setText(d.getDomian());
+        mDomainTV.setText(d.getDomain());
         mSelected.setChecked(d.isChecked());
     }
 

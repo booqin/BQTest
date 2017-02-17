@@ -1,33 +1,17 @@
 package com.example.domainsetting.bean;
 
 /**
- * TODO
+ * 域名Bean
  * Created by Boqin on 2017/2/16.
  * Modified by Boqin
  *
  * @Version
  */
 public class DomainBean {
-
-    private String mIp;
-    private String mPort;
+    /** 域名 */
+    private String mDomain;
+    /** 是否选中 */
     private boolean mChecked;
-
-    public String getIp() {
-        return mIp;
-    }
-
-    public void setIp(String ip) {
-        mIp = ip;
-    }
-
-    public String getPort() {
-        return mPort;
-    }
-
-    public void setPort(String port) {
-        mPort = port;
-    }
 
     public boolean isChecked() {
         return mChecked;
@@ -37,7 +21,11 @@ public class DomainBean {
         mChecked = checked;
     }
 
-    public String getDomian(){
-        return mIp+":"+mPort;
+    public String getDomain() {
+        return mDomain;
+    }
+
+    public void setDomain(String domain) {
+        mDomain = domain;
     }
 }

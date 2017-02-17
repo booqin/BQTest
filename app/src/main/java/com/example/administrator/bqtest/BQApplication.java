@@ -2,6 +2,8 @@ package com.example.administrator.bqtest;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.wxlib.util.SysUtil;
+import com.example.domainsetting.utils.DomainSetting;
+import com.example.frescotest.FrescoConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import android.app.Application;
@@ -16,37 +18,19 @@ import android.content.Context;
  */
 public class BQApplication extends Application{
 
-    /** 官方默认的key */
-    final String APP_KEY = "23015524";
-    /** 产品版本 */
-    public static String APP_VERSION;
-    /** 设备ID */
-    public static String DEVICE_ID;
-    /** 通道 */
-    public static String CHANNEL;
+
+    public static String DOMAIN = "192.168.1.172:8080";
+
+    private static boolean IS_DEBUG = true;
 
     /** 应用上下文 */
     private static Context AppContext;
 
     private static BQApplication MissApp;
 
-    /**
-     * 获取应用Context
-     *
-     * @description: Created by lenghuo on 2016/11/3 20:23
-     */
-    public static Context getAppContext() {
-        return AppContext;
-    }
 
-    /**
-     * 获取App实例
-     *
-     * @description: Created by lenghuo on 2016/11/5 10:49
-     */
-    public static BQApplication getAppInstance() {
-        return MissApp;
-    }
+    /** 官方默认的key */
+    final String APP_KEY = "23015524";
 
     @Override
     public void onCreate() {
@@ -56,6 +40,9 @@ public class BQApplication extends Application{
         MissApp = this;
 
         Fresco.initialize(this, FrescoConfig.getConfig(this));
+
+        //初始化域名配置模块
+        DOMAIN = DomainSetting.initialize(this, DOMAIN, IS_DEBUG);
 
         initOpenIM();
     }

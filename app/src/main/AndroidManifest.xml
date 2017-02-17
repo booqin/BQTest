@@ -23,6 +23,7 @@
         <activity android:name="com.example.openimtest.OpenIMTestActivity"/>
 
         <activity android:name="com.example.domainsetting.DomainSettingActivity"/>
+        <activity android:name="com.example.domainsetting.DomainAddActivity"/>
 
     </application>
 
