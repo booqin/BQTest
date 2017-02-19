@@ -1,6 +1,7 @@
-package com.example.domainsetting.utils;
+package com.example.domainsetting;
 
 import com.example.domainsetting.DomainSettingActivity;
+import com.example.domainsetting.utils.ORMUtil;
 
 import android.content.Context;
 

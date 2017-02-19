@@ -1,13 +1,11 @@
 package com.example.administrator.bqtest;
 
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.wxlib.util.SysUtil;
-import com.example.domainsetting.utils.DomainSetting;
-import com.example.frescotest.FrescoConfig;
-import com.facebook.drawee.backends.pipeline.Fresco;
-
 import android.app.Application;
 import android.content.Context;
+
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.wxlib.util.SysUtil;
+import com.example.domainsetting.DomainSetting;
 
 /**
  * TODO
@@ -39,7 +37,7 @@ public class BQApplication extends Application{
         AppContext = this;
         MissApp = this;
 
-        Fresco.initialize(this, FrescoConfig.getConfig(this));
+//        Fresco.initialize(this, FrescoConfig.getConfig(this));
 
         //初始化域名配置模块
         DOMAIN = DomainSetting.initialize(this, DOMAIN, IS_DEBUG);

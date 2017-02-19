@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.example.domainsetting.DomainSetting;
 import com.example.domainsetting.bean.DomainBean;
 
 import android.content.Context;

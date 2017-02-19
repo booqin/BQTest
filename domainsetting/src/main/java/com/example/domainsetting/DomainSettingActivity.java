@@ -4,10 +4,8 @@ import java.util.List;
 
 import com.example.domainsetting.adapter.DomainAdapter;
 import com.example.domainsetting.bean.DomainBean;
-import com.example.domainsetting.utils.DomainSetting;
 import com.example.domainsetting.utils.ORMUtil;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,12 +64,8 @@ public class DomainSettingActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new DomainAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-        //更新数据集
-        mAdapter.updateDataSet(getDataset());
+
+        initRecyclerView();
     }
 
     @Override
@@ -83,13 +77,13 @@ public class DomainSettingActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home) {
+        if (id == android.R.id.home) {//回退按钮
             onBackPressed();
-        } else if (id == R.id.action_add) {
-//            Intent intent = new Intent(this, DomainAddActivity.class);
-//            startActivityForResult(intent, REQUEST_CODE);
+        } else if (id == R.id.action_add) {//新增按钮
+            Intent intent = new Intent(this, DomainAddActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
 
-        } else if (id == R.id.action_settings) {
+        } else if (id == R.id.action_settings) {//未开放
             onBackPressed();
 
         }
@@ -107,18 +101,37 @@ public class DomainSettingActivity extends AppCompatActivity{
             mAdapter.updateDataSet(getDataset());
         }
     }
-
+    /**
+     * 配置接口
+     */
     public static void setDomainCheckedListener(CheckedListener checkedListener){
         CHECKED_LISTENER = checkedListener;
     }
 
+    /**
+     * 接口回调
+     */
     public static void onChecked(String domain){
         if (CHECKED_LISTENER!=null) {
             CHECKED_LISTENER.onChecked(domain);
         }
     }
-
+    /**
+     * 选中接口回调，在域名发生变化时回调
+     */
     public interface CheckedListener{
         void onChecked(String domain);
+    }
+
+    /**
+     * 初始化View
+     */
+    private void initRecyclerView() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new DomainAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+        //更新数据集
+        mAdapter.updateDataSet(getDataset());
     }
 }

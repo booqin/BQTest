@@ -52,7 +52,8 @@ public class DomainAdapter extends RecyclerView.Adapter {
                         //选中后需要保存到表中，同时回调更新项目的接口
                         onChecked(position);
                     } else {
-                        if (position == mCurrentSelectedPosition) {
+                        //屏蔽手动取消
+                        if (position == mCurrentSelectedPosition && mDomainBeanList.get(position).getDomain().equals(ORMUtil.getCheckedDomain())) {
                             buttonView.setChecked(true);
                             Toast.makeText(buttonView.getContext(), "至少需要一个地址", Toast.LENGTH_SHORT).show();
                         } else {
@@ -84,17 +85,20 @@ public class DomainAdapter extends RecyclerView.Adapter {
      */
     private void onChecked(int position) {
         String checkedDomain = ORMUtil.getCheckedDomain();
-        ORMUtil.updateDomainChecked(mDomainBeanList.get(position).getDomain());
+//        ORMUtil.getCheckedDomain();
+//        ORMUtil.updateDomainChecked(mDomainBeanList.get(position).getDomain());
         if (position != mCurrentSelectedPosition) {
-            if (mCurrentSelectedPosition >= 0 && mCurrentSelectedPosition < mDomainBeanList.size()) {
+            if (mCurrentSelectedPosition >= 0 && mCurrentSelectedPosition < mDomainBeanList.size() && !mDomainBeanList.get(position).getDomain().equals(checkedDomain)) {
                 mDomainBeanList.get(mCurrentSelectedPosition).setChecked(false);
                 notifyItemChanged(mCurrentSelectedPosition);
             }
         }
+        ORMUtil.updateDomainChecked(mDomainBeanList.get(position).getDomain());
         mCurrentSelectedPosition = position;
         mDomainBeanList.get(mCurrentSelectedPosition).setChecked(true);
         //单选中的域名发生变化时
         if (!mDomainBeanList.get(position).getDomain().equals(checkedDomain)) {
+            //回调接口
             DomainSettingActivity.onChecked(mDomainBeanList.get(position).getDomain());
         }
     }

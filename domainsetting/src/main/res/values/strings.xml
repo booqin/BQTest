@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DomainSetting</string>
+    <string name="domain">IP地址：%1$s</string>
 </resources>
