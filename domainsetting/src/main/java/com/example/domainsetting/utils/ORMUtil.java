@@ -27,8 +27,7 @@ public class ORMUtil {
     private static final String SP_NAME_CHECKED = "DM_CHECKED";
     /** SP中的key */
     private static final String SP_NAME_KEY = "DM_KEY";
-
-
+    
     /**
      * 新增域名
      */
