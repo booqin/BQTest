@@ -34,9 +34,11 @@ public class ORMUtil {
     public static void insertDomain(String domian){
         SharedPreferences sharedPreferences = DomainSetting.getAppContent().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Set<String> stringSet = sharedPreferences.getStringSet(SP_NAME_KEY, new ArraySet<String>());
+        //在修改stringSet时不能直接get后进行修改，如果直接操作并不会覆盖到SharedPreferences中，通过如下方式来修改完成。
+        Set<String> stringSet = new ArraySet<>(sharedPreferences.getStringSet(SP_NAME_KEY, new ArraySet<String>()));
         stringSet.add(domian);
         editor.remove(SP_NAME_KEY);
+        editor.clear();
         editor.putStringSet(SP_NAME_KEY, stringSet);
         editor.commit();
     }
