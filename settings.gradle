@@ -1,1 +1,1 @@
-include ':app', ':openimtest', ':wx', ':domainsetting'
+include ':app', ':openimtest', ':wx', ':domainsetting', ':statusmanager'
