@@ -1,5 +1,7 @@
 package com.example.statusmanager;
 
+import java.sql.Wrapper;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -27,20 +29,40 @@ public abstract class BaseStatusManager implements IStatusManager {
     }
 
     @Override
-    public void register(Object subscriber) {
-        EventBus.getDefault().register(subscriber);
+    public void register() {
+        EventBus.getDefault().register(this);
     }
 
     @Override
-    public void unregister(Object subscriber) {
-        EventBus.getDefault().unregister(subscriber);
+    public void unregister() {
+        EventBus.getDefault().unregister(this);
         mSubscriptions.unsubscribe();
     }
 
-    @Override
-    public void post(EventStateChangeBean eventStateChangeBean) {
+    public static void post(EventStateChangeBean eventStateChangeBean) {
         EventBus.getDefault().post(eventStateChangeBean);
     }
+
+//    public static void post(EventStateChangeBean eventStateChangeBean) {
+//        StateWrap stateWrap = new StateWrap(eventStateChangeBean);
+//        EventBus.getDefault().post(stateWrap);
+//    }
+
+    /**
+     * 监听状态更新入口
+     */
+//    @Subscribe
+//    public void onEventMainThread(StateWrap change) {
+//        Subscription subscribe;
+////        StateBean rxStateBean = new StateBean(change.getId());
+////        rxStateBean.setAmount(change.getLikeAmount());
+////        rxStateBean.setChecked(change.isChecked());
+//        subscribe = doSubscribe(change.getType(), change);
+//        if (subscribe == null) {
+//            return;
+//        }
+//        mSubscriptions.add(subscribe);
+//    }
 
     /**
      * 监听状态更新入口
@@ -60,7 +82,6 @@ public abstract class BaseStatusManager implements IStatusManager {
 
     public abstract Subscription doSubscribe(int type, StateBean stateBean);
 
-    public CompositeSubscription getSubscriptions() {
-        return mSubscriptions;
-    }
+//    public abstract Subscription doSubscribe(int type, StateWrap stateBean);
+
 }

@@ -28,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        findViewById(R.id.status).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), StatusActivity.class);
+                startActivity(intent);
+            }
+        });
+
         findViewById(R.id.oim_bt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

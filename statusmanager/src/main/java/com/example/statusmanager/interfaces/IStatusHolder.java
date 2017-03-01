@@ -3,13 +3,13 @@ package com.example.statusmanager.interfaces;
 import com.example.statusmanager.bean.StateBean;
 
 /**
- * 关注，赞，收藏状态操作接口
+ * 关注，赞，收藏状态操作接口，优化更新效率，对应RecyclerView中的ViewHolder
  * Created by Boqin on 2016/11/30.
  * Modified by Boqin
  *
  * @Version
  */
-public interface IStatusOperation {
+public interface IStatusHolder {
 
     /**
      * 帖子Id

@@ -8,6 +8,12 @@
     tools:context="com.example.administrator.bqtest.MainActivity">
 
     <Button
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="status"/>
+
+    <Button
         android:id="@+id/fresco_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

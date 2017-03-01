@@ -3,9 +3,9 @@ package com.example.statusmanager.impl;
 import java.util.List;
 
 import com.example.statusmanager.BaseStatusManager;
-import com.example.statusmanager.adapter.StatusAdapter;
+import com.example.statusmanager.interfaces.IStatusAdapter;
 import com.example.statusmanager.bean.StateBean;
-import com.example.statusmanager.interfaces.IStatusOperation;
+import com.example.statusmanager.interfaces.IStatusHolder;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,15 +23,19 @@ import rx.schedulers.Schedulers;
  *
  * @Version
  */
-public class DefaultStatusManager extends BaseStatusManager{
+public class RecyclerViewStatusManager extends BaseStatusManager{
 
     private RecyclerView mRecyclerView;
 
-    private StatusAdapter mAdapter;
+    private IStatusAdapter mAdapter;
 
-    public DefaultStatusManager(RecyclerView recyclerView){
+    public RecyclerViewStatusManager(RecyclerView recyclerView){
         super();
         mRecyclerView = recyclerView;
+    }
+
+    public void setAdapter(IStatusAdapter adapter){
+        mAdapter = adapter;
     }
 
     @Override
@@ -60,6 +64,32 @@ public class DefaultStatusManager extends BaseStatusManager{
         return subscribe;
     }
 
+//    @Override
+//    public Subscription doSubscribe(int type, StateWrap stateBean) {
+//        if (mAdapter == null) {
+//            return null;
+//        }
+//        Subscription subscribe = null;
+//        switch (type) {
+//            case FOLLOW:
+//                subscribe = getFollowSubscription(stateBean);
+//                break;
+//            case LIKE:
+//                subscribe = getLikeSubscription(stateBean);
+//                break;
+//            case COMMENT:
+//                subscribe = getCommentSubscription(stateBean);
+//                break;
+//            case BROWSE:
+//                subscribe = getBrowseAmountSubscription(stateBean);
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        return subscribe;
+//    }
+
     /**
      * 设置关注事件
      *
@@ -75,16 +105,16 @@ public class DefaultStatusManager extends BaseStatusManager{
                         if (mRecyclerView.getLayoutManager() instanceof LinearLayoutManager) {
                             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
 
-                            for (int i = 0; i < mAdapter.getCount(); i++) {
-                                if (mAdapter.getUserId()
+                            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+                                if (mAdapter.getId(i)
                                         .equals(likeFollowBean.getId())) {
                                     likeFollowBean.addUpdatePosition(i);
                                 }
                             }
                             for (int i = linearLayoutManager.findFirstVisibleItemPosition(); i <= linearLayoutManager.findLastVisibleItemPosition();
                                     i++) {
-                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusOperation) {
-                                    IStatusOperation statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(i);
+                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusHolder) {
+                                    IStatusHolder statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(i);
                                     if (statusOperation != null && userId != null && userId.equals(statusOperation.getUserId())) {
                                         //因为存在banner
                                         //移除需要更新的ItemView的位置，直接通过VH更新的位置添加
@@ -111,9 +141,9 @@ public class DefaultStatusManager extends BaseStatusManager{
                         if (likeFollowBean == null) {
                             return;
                         }
-                        IStatusOperation statusOperation;
+                        IStatusHolder statusOperation;
                         for (Integer integer : likeFollowBean.getViewHoldPosition()) {
-                            statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
+                            statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
                             if (statusOperation != null) {
                                 statusOperation.onUpdateFollow(likeFollowBean);
 //                                mDataSet.get(integer).getUserInfo().setFollow(likeFollowBean.isChecked());
@@ -128,7 +158,7 @@ public class DefaultStatusManager extends BaseStatusManager{
 //                            }
                             mAdapter.onUpdate(FOLLOW, likeFollowBean.getUpdatePosition().get(i), likeFollowBean);
 //                            mRecyclerView.notifyItemChanged(likeFollowBean.getUpdatePosition().get(i) + getHeaderCount());
-                            mAdapter.notifyItemChanged(likeFollowBean.getUpdatePosition().get(i) + mAdapter.getHeaderCount());
+                            mAdapter.notifyItemViewChanged(likeFollowBean.getUpdatePosition().get(i) + mAdapter.getHeaderCount());
                         }
 
                     }
@@ -151,16 +181,16 @@ public class DefaultStatusManager extends BaseStatusManager{
                             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                             for (int i = linearLayoutManager.findFirstVisibleItemPosition(); i <= linearLayoutManager.findLastVisibleItemPosition();
                                     i++) {
-                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusOperation) {
-                                    IStatusOperation statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(i);
+                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusHolder) {
+                                    IStatusHolder statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(i);
                                     if (statusOperation != null && id != null && id.equals(statusOperation.getId())) {
                                         likeFollowBean.addViewHoldPosition(i - mAdapter.getHeaderCount());
                                         return likeFollowBean;
                                     }
                                 }
                             }
-                            for (int i = 0; i < mAdapter.getCount(); i++) {
-                                if (mAdapter.getUserId().equals(likeFollowBean.getId())) {
+                            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+                                if (mAdapter.getId(i).equals(likeFollowBean.getId())) {
                                     likeFollowBean.addUpdatePosition(i);
                                 }
                             }
@@ -181,9 +211,9 @@ public class DefaultStatusManager extends BaseStatusManager{
                         if (likeFollowBean == null) {
                             return;
                         }
-                        IStatusOperation statusOperation;
+                        IStatusHolder statusOperation;
                         for (Integer integer : likeFollowBean.getViewHoldPosition()) {
-                            statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
+                            statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
                             if (statusOperation != null) {
                                 statusOperation.onUpdateLike(likeFollowBean);
 //                                mDataSet.get(integer).setLike(likeFollowBean.isChecked());
@@ -196,7 +226,7 @@ public class DefaultStatusManager extends BaseStatusManager{
 //                            mDataSet.get(likeFollowBean.getUpdatePosition().get(i)).setLikeAmount(likeFollowBean.getAmount());
                             mAdapter.onUpdate(LIKE, likeFollowBean.getUpdatePosition().get(i), likeFollowBean);
 //                            mRecyclerView.notifyItemChanged(likeFollowBean.getUpdatePosition().get(i) + getHeaderCount());
-                            mAdapter.notifyItemChanged(likeFollowBean.getUpdatePosition().get(i) + mAdapter.getHeaderCount());
+                            mAdapter.notifyItemViewChanged(likeFollowBean.getUpdatePosition().get(i) + mAdapter.getHeaderCount());
                         }
                     }
                 });
@@ -218,16 +248,16 @@ public class DefaultStatusManager extends BaseStatusManager{
                             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                             for (int i = linearLayoutManager.findFirstVisibleItemPosition(); i <= linearLayoutManager.findLastVisibleItemPosition();
                                     i++) {
-                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusOperation) {
-                                    IStatusOperation statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(i);
+                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusHolder) {
+                                    IStatusHolder statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(i);
                                     if (statusOperation != null && id != null && id.equals(statusOperation.getId())) {
                                         likeFollowBean.addViewHoldPosition(i - mAdapter.getHeaderCount());
                                         return likeFollowBean;
                                     }
                                 }
                             }
-                            for (int i = 0; i < mAdapter.getCount(); i++) {
-                                if (mAdapter.getUserId().equals(likeFollowBean.getId())) {
+                            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+                                if (mAdapter.getId(i).equals(likeFollowBean.getId())) {
                                     likeFollowBean.addUpdatePosition(i);
                                 }
                             }
@@ -248,9 +278,9 @@ public class DefaultStatusManager extends BaseStatusManager{
                         if (likeFollowBean == null) {
                             return;
                         }
-                        IStatusOperation statusOperation;
+                        IStatusHolder statusOperation;
                         for (Integer integer : likeFollowBean.getViewHoldPosition()) {
-                            statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
+                            statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
                             if (statusOperation != null) {
                                 statusOperation.onUpdateComment(likeFollowBean);
 //                                mDataSet.get(integer).setCmtAmount(likeFollowBean.getAmount());
@@ -261,7 +291,7 @@ public class DefaultStatusManager extends BaseStatusManager{
 //                            mDataSet.get(likeFollowBean.getUpdatePosition().get(i)).setCmtAmount(likeFollowBean.getAmount());
                             mAdapter.onUpdate(COMMENT, likeFollowBean.getUpdatePosition().get(i), likeFollowBean);
 //                            mRecyclerView.notifyItemChanged(likeFollowBean.getUpdatePosition().get(i) + getHeaderCount());
-                            mAdapter.notifyItemChanged(likeFollowBean.getUpdatePosition().get(i) + mAdapter.getHeaderCount());
+                            mAdapter.notifyItemViewChanged(likeFollowBean.getUpdatePosition().get(i) + mAdapter.getHeaderCount());
 
                         }
                     }
@@ -284,16 +314,16 @@ public class DefaultStatusManager extends BaseStatusManager{
                             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                             for (int i = linearLayoutManager.findFirstVisibleItemPosition(); i <= linearLayoutManager.findLastVisibleItemPosition();
                                     i++) {
-                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusOperation) {
-                                    IStatusOperation statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(i);
+                                if (mRecyclerView.findViewHolderForAdapterPosition(i) instanceof IStatusHolder) {
+                                    IStatusHolder statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(i);
                                     if (statusOperation != null && id != null && id.equals(statusOperation.getId())) {
                                         browseBean.addViewHoldPosition(i - mAdapter.getHeaderCount());
                                         return browseBean;
                                     }
                                 }
                             }
-                            for (int i = 0; i < mAdapter.getCount(); i++) {
-                                if (mAdapter.getUserId().equals(browseBean.getId())) {
+                            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+                                if (mAdapter.getId(i).equals(browseBean.getId())) {
                                     browseBean.addUpdatePosition(i);
                                 }
                             }
@@ -314,9 +344,9 @@ public class DefaultStatusManager extends BaseStatusManager{
                         if (browseBean == null) {
                             return;
                         }
-                        IStatusOperation statusOperation;
+                        IStatusHolder statusOperation;
                         for (Integer integer : browseBean.getViewHoldPosition()) {
-                            statusOperation = (IStatusOperation) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
+                            statusOperation = (IStatusHolder) mRecyclerView.findViewHolderForAdapterPosition(integer + mAdapter.getHeaderCount());
                             if (statusOperation != null) {
                                 statusOperation.onUpdateBrowseAmount(browseBean);
 //                            mDataSet.get(integer).setBrowseAmount(browseBean.getAmount());

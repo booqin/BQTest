@@ -1,5 +1,7 @@
 package com.example.statusmanager.bean;
 
+import com.example.statusmanager.interfaces.IStatusBean;
+
 /**
  * 关注变化事件事件
  * Created by Boqin on 2016/12/8.
@@ -7,7 +9,7 @@ package com.example.statusmanager.bean;
  *
  * @Version
  */
-public class EventStateChangeBean {
+public class EventStateChangeBean implements IStatusBean{
 
     /** item对象id */
     private String mId;
@@ -34,6 +36,7 @@ public class EventStateChangeBean {
     /**
      * 获取id
      */
+    @Override
     public String getId() {
         return mId;
     }
@@ -58,4 +61,5 @@ public class EventStateChangeBean {
     public int getType() {
         return mType;
     }
+
 }

@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".StatusActivity"/>
+
         <!--<activity android:name="com.example.frescotest.BQMainActivity"/>-->
 
         <activity android:name="com.example.openimtest.OpenIMTestActivity"/>
