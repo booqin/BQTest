@@ -1,7 +1,7 @@
 package com.example.statusmanager.interfaces;
 
 /**
- * TODO
+ * 状态Bean接口,所有需要传递的Bean都要实现该接口
  * Created by Boqin on 2017/3/1.
  * Modified by Boqin
  *
