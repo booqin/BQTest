@@ -20,6 +20,8 @@
 
         <activity android:name=".StatusActivity"/>
 
+        <activity android:name=".StatusDetailActivity"/>
+
         <!--<activity android:name="com.example.frescotest.BQMainActivity"/>-->
 
         <activity android:name="com.example.openimtest.OpenIMTestActivity"/>

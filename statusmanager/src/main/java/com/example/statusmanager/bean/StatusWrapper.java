@@ -1,5 +1,6 @@
 package com.example.statusmanager.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.statusmanager.interfaces.IStatusBean;
@@ -11,9 +12,9 @@ import com.example.statusmanager.interfaces.IStatusBean;
  *
  * @Version
  */
-public class StateWrap {
+public class StatusWrapper<T extends IStatusBean>{
 
-    private Object wrapBean;
+    private T wrapBean;
 
     private String id;
 
@@ -24,17 +25,21 @@ public class StateWrap {
     /** 对应的DataSet位置 */
     private List<Integer> mUpdatePosition;
 
-    public StateWrap(IStatusBean statusBean){
+    public StatusWrapper(T statusBean){
         setBean(statusBean);
         setId(statusBean.getId());
         setType(statusBean.getType());
+
+        mViewHoldPosition = new ArrayList<>();
+        mUpdatePosition = new ArrayList<>();
+
     }
 
-    public Object getBean(){
+    public T getBean(){
         return wrapBean;
     }
 
-    public void setBean(Object o){
+    public void setBean(T o){
         wrapBean = o;
     }
 

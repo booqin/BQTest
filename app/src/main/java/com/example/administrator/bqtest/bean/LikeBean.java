@@ -4,27 +4,31 @@ import com.example.statusmanager.interfaces.IStatusBean;
 import com.example.statusmanager.interfaces.IStatusManager;
 
 /**
- * 关注，需要传递的Bean
- * Created by Boqin on 2017/3/1.
+ * 赞
+ * Created by Boqin on 2017/3/2.
  * Modified by Boqin
  *
  * @Version
  */
-public class FollowBean extends IStatusBean{
+public class LikeBean extends IStatusBean{
 
-    private String userId;
+    private String id;
 
     private boolean checked;
 
 
     @Override
     public String getId() {
-        return userId;
+        return id;
     }
 
     @Override
     public int getType() {
         return IStatusManager.FOLLOW;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isChecked() {
@@ -33,13 +37,5 @@ public class FollowBean extends IStatusBean{
 
     public void setChecked(boolean checked) {
         this.checked = checked;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.statusmanager.interfaces;
 
-import com.example.statusmanager.bean.StateBean;
+import com.example.statusmanager.bean.StatusWrapper;
 
 /**
  * 关注，赞，收藏状态操作接口，优化更新效率，对应RecyclerView中的ViewHolder
@@ -19,37 +19,30 @@ public interface IStatusHolder {
     String getId();
 
     /**
-     * 用户Id
-     *
-     * @description: Created by Boqin on 2016/12/7 12:56
-     */
-    String getUserId();
-
-    /**
      * 更新喜欢操作
      *
      * @description: Created by Boqin on 2016/12/7 12:56
      */
-    void onUpdateLike(StateBean rxStateBean);
+    void onUpdateLike(StatusWrapper statusWrapper);
 
     /**
      * 更新关注操作
      *
      * @description: Created by Boqin on 2016/12/7 12:56
      */
-    void onUpdateFollow(StateBean rxStateBean);
+    void onUpdateFollow(StatusWrapper statusWrapper);
 
     /**
      * 更新评论操作
      *
      * @description: Created by Boqin on 2016/12/7 12:56
      */
-    void onUpdateComment(StateBean rxStateBean);
+    void onUpdateComment(StatusWrapper statusWrapper);
 
     /**
      * 更新浏览量操作
      *
      * @description: Created by Boqin on 2016/12/7 12:56
      */
-    void onUpdateBrowseAmount(StateBean rxStateBean);
+    void onUpdateBrowseAmount(StatusWrapper statusWrapper);
 }

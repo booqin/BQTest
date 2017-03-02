@@ -10,7 +10,7 @@
             android:id="@+id/follow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.25"
             android:text="关注"/>
 
         <TextView
@@ -19,7 +19,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:padding="10dp"
-            android:text="信息"/>
+            android:text="信息"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/detail_bt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:text="详情页"/>
 
     </LinearLayout>
 

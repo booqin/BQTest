@@ -1,6 +1,6 @@
 package com.example.statusmanager.interfaces;
 
-import com.example.statusmanager.bean.StateBean;
+import com.example.statusmanager.bean.StatusWrapper;
 
 /**
  * 用于适配器，获取一些基础数据以及更新数据源
@@ -31,7 +31,7 @@ public interface IStatusAdapter {
      * @param type 类型
      * @param position 在数据集中的位置
      */
-    void onUpdate(int type, int position, StateBean stateBean);
+    void onUpdate(int type, int position, StatusWrapper statusWrapper);
 
     /**
      * 更新列表View，用于某些不再当前界面显示列表View

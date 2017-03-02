@@ -14,7 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 /**
- * TODO
+ * 状态列表页
  * Created by Boqin on 2017/3/1.
  * Modified by Boqin
  *
@@ -57,8 +57,7 @@ public class StatusActivity extends AppCompatActivity{
         mDataset = new ArrayList<>();
         for (int i=0; i<20; i++){
             FollowBean followBean = new FollowBean();
-            followBean.setId(i*100+(int)(Math.random()*10));
-            followBean.setUserId((int)(Math.random()*10));
+            followBean.setUserId("" + ((int) (Math.random() * 10)));
             followBean.setChecked(false);
             mDataset.add(followBean);
         }

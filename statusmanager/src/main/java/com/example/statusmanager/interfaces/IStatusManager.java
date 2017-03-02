@@ -1,7 +1,5 @@
 package com.example.statusmanager.interfaces;
 
-import com.example.statusmanager.bean.EventStateChangeBean;
-
 /**
  * 状态管理工具，<p>用于赞，关注等需要同步的状态 <p>
  * Created by Boqin on 2017/2/28.
@@ -30,5 +28,4 @@ public interface IStatusManager {
      */
     void unregister();
 
-//    void post(EventStateChangeBean eventStateChangeBean);
 }

@@ -7,9 +7,9 @@ package com.example.statusmanager.interfaces;
  *
  * @Version
  */
-public interface IStatusBean {
+public abstract class IStatusBean {
 
-    String getId();
+    public abstract String getId();
 
-    int getType();
+    public abstract int getType();
 }
