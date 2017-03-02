@@ -10,7 +10,7 @@ import com.example.statusmanager.interfaces.IStatusManager;
  *
  * @Version
  */
-public class LikeBean extends IStatusBean{
+public class LikeBean implements IStatusBean{
 
     private String id;
 
@@ -18,13 +18,13 @@ public class LikeBean extends IStatusBean{
 
 
     @Override
-    public String getId() {
+    public String getStatusKey() {
         return id;
     }
 
     @Override
-    public int getType() {
-        return IStatusManager.FOLLOW;
+    public int getStatusType() {
+        return LIKE;
     }
 
     public void setId(String id) {

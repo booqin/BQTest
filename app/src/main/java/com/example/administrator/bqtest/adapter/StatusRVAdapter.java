@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.administrator.bqtest.R;
 import com.example.administrator.bqtest.StatusDetailActivity;
 import com.example.administrator.bqtest.bean.FollowBean;
-import com.example.administrator.bqtest.bean.LikeBean;
 import com.example.statusmanager.bean.StatusWrapper;
 import com.example.statusmanager.impl.RecyclerViewStatusManager;
 import com.example.statusmanager.interfaces.IStatusAdapter;
@@ -53,7 +52,7 @@ public class StatusRVAdapter extends RecyclerView.Adapter implements IStatusAdap
     }
 
     @Override
-    public String getId(int position) {
+    public String getStatusKey(int position, int statusType) {
         return ""+mFollowBeanList.get(position).getUserId();
     }
 
@@ -63,7 +62,7 @@ public class StatusRVAdapter extends RecyclerView.Adapter implements IStatusAdap
     }
 
     @Override
-    public void onUpdate(int type, int position, StatusWrapper statusWrapper) {
+    public void onUpdate(int position, StatusWrapper statusWrapper) {
         if (statusWrapper.getBean() instanceof FollowBean) {
             mFollowBeanList.get(position).setChecked(((FollowBean) statusWrapper.getBean()).isChecked());
         }
@@ -93,7 +92,7 @@ public class StatusRVAdapter extends RecyclerView.Adapter implements IStatusAdap
                 @Override
                 public void onClick(View v) {
                     mFollowBean.setChecked(!mFollowBean.isChecked());
-                    StatusWrapper<LikeBean> statusWrapper = new StatusWrapper(mFollowBean);
+                    StatusWrapper statusWrapper = new StatusWrapper(mFollowBean);
                     RecyclerViewStatusManager.post(statusWrapper);
 
                 }
@@ -117,23 +116,13 @@ public class StatusRVAdapter extends RecyclerView.Adapter implements IStatusAdap
         }
 
         @Override
-        public String getId() {
+        public String getStatusKey(int statusType) {
             return ""+mFollowBean.getUserId();
         }
 
-        @Override
-        public void onUpdateLike(StatusWrapper statusWrapper) {
-            Log.d("BQ", "LIKE");
-            if (statusWrapper.getBean() instanceof FollowBean) {
-                FollowBean followBean = (FollowBean) statusWrapper.getBean();
-                mFollowBean.setChecked(followBean.isChecked());
-                mFollowButton.setBackgroundResource(followBean.isChecked()?R.color.aliwx_common_text_color4:R.color.aliwx_bg_color_white);
-
-            }
-        }
 
         @Override
-        public void onUpdateFollow(StatusWrapper statusWrapper) {
+        public void onUpdateStatus(StatusWrapper statusWrapper) {
             Log.d("BQ", "Follow");
             if (statusWrapper.getBean() instanceof FollowBean) {
                 FollowBean followBean = (FollowBean) statusWrapper.getBean();
@@ -143,14 +132,5 @@ public class StatusRVAdapter extends RecyclerView.Adapter implements IStatusAdap
             }
         }
 
-        @Override
-        public void onUpdateComment(StatusWrapper rxStateBean) {
-
-        }
-
-        @Override
-        public void onUpdateBrowseAmount(StatusWrapper rxStateBean) {
-
-        }
     }
 }

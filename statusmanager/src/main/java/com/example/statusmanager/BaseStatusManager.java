@@ -36,10 +36,10 @@ public abstract class BaseStatusManager implements IStatusManager {
         mSubscriptions.unsubscribe();
     }
 
-//    public static void post(EventStateChangeBean eventStateChangeBean) {
-//        EventBus.getDefault().post(eventStateChangeBean);
-//    }
-
+    /**
+     * 发起更新请求
+     * @param statusWrapper 包裹类
+     */
     public static void post(StatusWrapper statusWrapper) {
         EventBus.getDefault().post(statusWrapper);
     }
@@ -57,24 +57,9 @@ public abstract class BaseStatusManager implements IStatusManager {
         mSubscriptions.add(subscribe);
     }
 
-//    /**
-//     * 监听状态更新入口
-//     */
-//    @Subscribe
-//    public void onEventMainThread(EventStateChangeBean change) {
-//        Subscription subscribe;
-//        StateBean rxStateBean = new StateBean(change.getId());
-//        rxStateBean.setAmount(change.getLikeAmount());
-//        rxStateBean.setChecked(change.isChecked());
-//        subscribe = doSubscribe(change.getType(), rxStateBean);
-//        if (subscribe == null) {
-//            return;
-//        }
-//        mSubscriptions.add(subscribe);
-//    }
-
-//    public abstract Subscription doSubscribe(int type, StateBean stateBean);
-
+    /**
+     * 订阅事件，处理数据
+     */
     public abstract Subscription doSubscribe(StatusWrapper statusWrapper);
 
 }

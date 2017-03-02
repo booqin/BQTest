@@ -12,34 +12,34 @@ import com.example.statusmanager.interfaces.IStatusBean;
  *
  * @Version
  */
-public class StatusWrapper<T extends IStatusBean>{
+public class StatusWrapper{
 
-    private T wrapBean;
+    private IStatusBean wrapBean;
 
-    private String id;
+    private String statusKey;
 
-    private int type;
+    private int statusType;
 
     /** 在列表显示的ViewHolder位置 */
     private List<Integer> mViewHoldPosition;
     /** 对应的DataSet位置 */
     private List<Integer> mUpdatePosition;
 
-    public StatusWrapper(T statusBean){
+    public StatusWrapper(IStatusBean statusBean){
         setBean(statusBean);
-        setId(statusBean.getId());
-        setType(statusBean.getType());
+        setStatusKey(statusBean.getStatusKey());
+        setStatusType(statusBean.getStatusType());
 
         mViewHoldPosition = new ArrayList<>();
         mUpdatePosition = new ArrayList<>();
 
     }
 
-    public T getBean(){
+    public IStatusBean getBean(){
         return wrapBean;
     }
 
-    public void setBean(T o){
+    public void setBean(IStatusBean o){
         wrapBean = o;
     }
 
@@ -60,19 +60,19 @@ public class StatusWrapper<T extends IStatusBean>{
         mViewHoldPosition.add(updateViewHoldPosition);
     }
 
-    public String getId() {
-        return id;
+    public String getStatusKey() {
+        return statusKey;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setStatusKey(String statusKey) {
+        this.statusKey = statusKey;
     }
 
-    public int getType() {
-        return type;
+    public int getStatusType() {
+        return statusType;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setStatusType(int statusType) {
+        this.statusType = statusType;
     }
 }

@@ -10,7 +10,7 @@ import com.example.statusmanager.interfaces.IStatusManager;
  *
  * @Version
  */
-public class FollowBean extends IStatusBean{
+public class FollowBean implements IStatusBean{
 
     private String userId;
 
@@ -18,13 +18,13 @@ public class FollowBean extends IStatusBean{
 
 
     @Override
-    public String getId() {
+    public String getStatusKey() {
         return userId;
     }
 
     @Override
-    public int getType() {
-        return IStatusManager.FOLLOW;
+    public int getStatusType() {
+        return FOLLOW;
     }
 
     public boolean isChecked() {

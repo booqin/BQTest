@@ -7,9 +7,24 @@ package com.example.statusmanager.interfaces;
  *
  * @Version
  */
-public abstract class IStatusBean {
+public interface IStatusBean {
 
-    public abstract String getId();
+    /** 关注类型 */
+    int FOLLOW = 0;
+    /** 赞类型 */
+    int LIKE = 1;
+    /** 评论类型 */
+    int COMMENT = 2;
+    /** 浏览量类型 */
+    int BROWSE = 3;
 
-    public abstract int getType();
+    /**
+     * 获取状态键值，用于匹配到ViewHolder或者dataset
+     */
+    String getStatusKey();
+
+    /**
+     * 获取状态类型，用于在同一个dataset中更新不同的状态
+     */
+    int getStatusType();
 }

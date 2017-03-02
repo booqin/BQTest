@@ -52,7 +52,7 @@ public class StatusDetailActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 mFollowBean.setChecked(!mFollowBean.isChecked());
-                StatusWrapper<FollowBean> statusWrapper = new StatusWrapper<FollowBean>(mFollowBean);
+                StatusWrapper statusWrapper = new StatusWrapper(mFollowBean);
                 RecyclerViewStatusManager.post(statusWrapper);
                 mButton.setText(mFollowBean.isChecked()?"已关注":"关注");
             }

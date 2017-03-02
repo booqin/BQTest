@@ -9,15 +9,6 @@ package com.example.statusmanager.interfaces;
  */
 public interface IStatusManager {
 
-    /** 关注类型 */
-    int FOLLOW = 0;
-    /** 赞类型 */
-    int LIKE = 1;
-    /** 评论类型 */
-    int COMMENT = 2;
-    /** 浏览量类型 */
-    int BROWSE = 3;
-
     /**
      * 注册事件
      */
