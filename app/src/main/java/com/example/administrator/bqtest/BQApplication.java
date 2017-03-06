@@ -4,8 +4,12 @@ import android.app.Application;
 import android.content.Context;
 
 import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.aop.AdviceBinder;
+import com.alibaba.mobileim.aop.PointCutEnum;
 import com.alibaba.wxlib.util.SysUtil;
 import com.example.domainsetting.DomainSetting;
+import com.example.openimtest.customim.ChattingPageUICustom;
+import com.example.openimtest.customim.ConversationListUICustom;
 
 /**
  * TODO
@@ -43,6 +47,8 @@ public class BQApplication extends Application{
         DOMAIN = DomainSetting.initialize(this, DOMAIN, IS_DEBUG);
 
         initOpenIM();
+
+
     }
 
     private void initOpenIM() {
@@ -56,6 +62,10 @@ public class BQApplication extends Application{
         if(SysUtil.isMainProcess()){
             YWAPI.init(this, APP_KEY);
         }
+
+        //其中ConversationListUICustom是继承自IMConversationListUI的自定义类
+        AdviceBinder.bindAdvice(PointCutEnum.CONVERSATION_FRAGMENT_UI_POINTCUT, ConversationListUICustom.class);
+        AdviceBinder.bindAdvice(PointCutEnum.CHATTING_FRAGMENT_UI_POINTCUT, ChattingPageUICustom.class);
     }
 
 }

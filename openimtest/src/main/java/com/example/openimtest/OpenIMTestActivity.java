@@ -5,7 +5,10 @@ import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.YWLoginParam;
 import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.contact.IYWContactHeadClickCallback;
+import com.alibaba.mobileim.contact.IYWContactService;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,10 +26,10 @@ import android.widget.Toast;
  */
 public class OpenIMTestActivity extends AppCompatActivity {
 
-    private final String APP_KEY = "23015524";
+    private final String APP_KEY = "23634322";
 
-    private final String userid = "testpro1";
-    private final String password = "taobao1234";
+    private final String userid = "bqin";
+    private final String password = "123456";
 
     private final String target = "testpro17"; //消息接收者ID
     private final String appkey = "23015524"; //消息接收者appKey
@@ -74,7 +77,25 @@ public class OpenIMTestActivity extends AppCompatActivity {
             }
         });
 
+        initKit();
+    }
 
+    private void initKit() {
+        final IYWContactService contactService = mIMKit.getContactService();
+        //头像点击的回调（开发者可以按需设置）
+        contactService.setContactHeadClickCallback(new IYWContactHeadClickCallback() {
+            @Override
+            public Intent onShowProfileActivity(String userId, String appKey) {
+                //需要开发者返回一个Intent
+                Toast.makeText(OpenIMTestActivity.this, "头像被点击了", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+
+            @Override
+            public Intent onDisposeProfileHeadClick(Context context, String s, String s1) {
+                return null;
+            }
+        });
     }
 
     private void doLogin(YWIMKit mIMKit) {
@@ -99,6 +120,10 @@ public class OpenIMTestActivity extends AppCompatActivity {
                 Toast.makeText(OpenIMTestActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void doRegister(){
+        mIMKit.getTribeService();
     }
 
 }
